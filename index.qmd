@@ -1,5 +1,7 @@
 ---
 title: "Billboard Graphic"
+execute:
+  echo: false
 ---
 
 ```{r}
