@@ -1,0 +1,47 @@
+---
+title: "Billboard Graphic"
+---
+
+```{r}
+#| message: false
+
+library(tidyverse)
+```
+
+```{r}
+#| message: false
+#| warning: false
+
+billboard_long <- tidyr::billboard |>
+  pivot_longer(
+    cols = starts_with("wk"),
+    names_to = "week",
+    values_to = "rank",
+    names_prefix = "wk",
+    values_drop_na = TRUE
+  ) |>
+  mutate(week = as.numeric(week)) |>
+  filter(week <= 20)
+
+ggplot(billboard_long, aes(
+  x = week,
+  y = rank,
+  group = track,
+  color = artist
+)) +
+  geom_line(linewidth = 1, alpha = 0.7) +
+  scale_y_reverse() +
+  scale_color_viridis_d() +
+  labs(
+    title = "The Race to the Top of the Billboard Charts",
+    subtitle = "How songs move through the charts over 20 weeks",
+    x = "Weeks on Billboard",
+    y = "Chart Position",
+    color = "Artist"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(
+    plot.title = element_text(face = "bold", size = 18),
+    legend.position = "none"
+  )
+```
