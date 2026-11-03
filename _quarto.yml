@@ -3,7 +3,7 @@ project:
 
 website:
   title: "Websites 2"
-    navbar:
+  navbar:
     left:
       - href: index.qmd
         text: Home
